@@ -1,0 +1,19 @@
+.scoreboard {
+  width:100%;
+  height: 40px;
+  background:white;
+}
+
+.scoreboard>div {
+  float:left;
+  padding-right: 30px;
+  font-size: 2.5em;
+}
+
+.killCount {
+  color: green;
+}
+
+.deathCount {
+  color: red;
+}
