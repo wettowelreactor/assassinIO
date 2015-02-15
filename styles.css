@@ -17,3 +17,71 @@
 .deathCount {
   color: red;
 }
+
+.robot {
+  width: 32px;
+  height: 32px;
+  background: url('characterSprites.png');
+  zoom: 2;
+  background-position: -128px 0;
+}
+
+.robotSouth{
+  -webkit-animation: robotForward .9s steps(2) infinite;
+  animation: robotForward .9s steps(2) infinite;
+}
+
+@-webkit-keyframes robotForward {
+   0% { background-position: -96px 0; } 
+   100% { background-position: -224px 0; }
+}
+
+@keyframes robotForward {
+   0% { background-position: -96px 0; } 
+   100% { background-position: -224px 0; }
+}
+
+.robotWest{
+  -webkit-animation: robotLeft .9s steps(2) infinite;
+  animation: robotLeft .9s steps(2) infinite;
+}
+
+@-webkit-keyframes robotLeft {
+   0% { background-position: -96px -32px; } 
+   100% { background-position: -224px -32px; }
+}
+
+@keyframes robotLeft {
+   0% { background-position: -96px -32px; } 
+   100% { background-position: -224px -32px; }
+}
+
+.robotEast{
+  -webkit-animation: robotRight .9s steps(2) infinite;
+  animation: robotRight .9s steps(2) infinite;
+}
+
+@-webkit-keyframes robotRight {
+   0% { background-position: -96px -64px; } 
+   100% { background-position: -224px -64px; }
+}
+
+@keyframes robotRight {
+   0% { background-position: -96px -64px; } 
+   100% { background-position: -224px -64px; }
+}
+
+.robotNorth{
+  -webkit-animation: robotSouth .9s steps(2) infinite;
+  animation: robotSouth .9s steps(2) infinite;
+}
+
+@-webkit-keyframes robotSouth {
+   0% { background-position: -96px -96px; } 
+   100% { background-position: -224px -96px; }
+}
+
+@keyframes robotSouth {
+   0% { background-position: -96px -96px; } 
+   100% { background-position: -224px -96px; }
+}
