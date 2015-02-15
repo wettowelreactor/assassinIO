@@ -10,6 +10,11 @@
   font-size: 2.5em;
 }
 
+.playArea {
+  width: 100vh;
+  height: 100vw;
+}
+
 .killCount {
   color: green;
 }
@@ -19,11 +24,14 @@
 }
 
 .robot {
+  position: fixed;
   width: 32px;
   height: 32px;
   background: url('characterSprites.png');
-  zoom: 2;
   background-position: -128px 0;
+  -webkit-transform: scale(2);
+  -ms-transform: scale(2);
+  transform: scale(2);
 }
 
 .robotSouth{
