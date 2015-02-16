@@ -1,22 +1,24 @@
 var Game = function () {
   this.activePlayers = 0;
-  this.numberOfRobots = 10;
+  this.numberOfRobots = 1;
   this.spriteSize = 64;
   this.stepSize = 10;
-  this.jitter = 50;
 };
 
 Game.prototype.pixelize = function(number) { return number + 'px'; };
 Game.prototype.dePixel = function(string) { return string.slice( 0, -2 ); };
 Game.prototype.rand  = function(n){ return Math.floor( Math.random() * n ); };
 Game.prototype.randX = function() { 
-  return this.pixelize(this.rand(this.maxX()) + this.minX()); 
+  var randx = this.rand(this.maxX()) + this.minX();
+  var xoffset = randx % this.spriteSize;
+  randx -= xoffset;
+  return this.pixelize(randx); 
 };
 Game.prototype.randY = function() {
-  return this.pixelize(this.rand(this.maxY()) + this.minY()); 
-};
-Game.prototype.randJitter = function() {
-  return this.rand(this.jitter);
+  var randy = this.rand(this.maxY()) + this.minY();
+  var yoffset = randy % this.spriteSize;
+  randy -= yoffset;
+  return this.pixelize(randy);
 };
 Game.prototype.minX = function() { return 0; };
 Game.prototype.maxX = function() { return window.innerWidth - this.spriteSize; };
@@ -63,7 +65,7 @@ Game.prototype.getMoveFunc = function(number) {
 
 Game.prototype.moveRobotNorth = function(element) {
   var currentCoords = this.getCurrentCoords(element);
-  currentCoords[1] -= this.randJitter();
+  currentCoords[1] -= this.spriteSize;
   if (currentCoords[1] < this.minY()) {
     var moveFunc = this.getMoveFunc(currentCoords[1] % 5).bind(this);
     return moveFunc(element);
@@ -75,7 +77,7 @@ Game.prototype.moveRobotNorth = function(element) {
 
 Game.prototype.moveRobotEast = function(element) {
   var currentCoords = this.getCurrentCoords(element);
-  currentCoords[0] += this.randJitter();
+  currentCoords[0] += this.spriteSize;
   if (currentCoords[0] > this.maxX()) {
     var moveFunc = this.getMoveFunc(currentCoords[0] % 5).bind(this);
     return moveFunc(element);
@@ -87,7 +89,7 @@ Game.prototype.moveRobotEast = function(element) {
 
 Game.prototype.moveRobotSouth = function(element) {
   var currentCoords = this.getCurrentCoords(element);
-  currentCoords[1] += this.randJitter();
+  currentCoords[1] += this.spriteSize;
   if (currentCoords[1] > this.maxY()) {
     var moveFunc = this.getMoveFunc(currentCoords[1] % 5).bind(this);
     return moveFunc(element);
@@ -99,7 +101,7 @@ Game.prototype.moveRobotSouth = function(element) {
 
 Game.prototype.moveRobotWest = function(element) {
   var currentCoords = this.getCurrentCoords(element);
-  currentCoords[0] -= this.randJitter();
+  currentCoords[0] -= this.spriteSize;
   if (currentCoords[0] < this.minX()) {
     var moveFunc = this.getMoveFunc(currentCoords[0] % 5).bind(this);
     return moveFunc(element);
@@ -115,8 +117,9 @@ Game.prototype.moveRobotPause = function(element) {
 };
 
 Game.prototype.getCurrentCoords = function(element) {
-  var x = this.dePixel(element.style('left'));
-  var y = this.dePixel(element.style('top'));
+  var x = +this.dePixel(element.style('left'));
+  var y = +this.dePixel(element.style('top'));
+  console.log('current', x, y);
   return [x, y];
 };
 
@@ -126,13 +129,12 @@ Game.prototype.moveRobot = function(element, bias) {
   var newCoords;
 
   direction = direction > 4 ? bias : direction;
-
   moveFunc = this.getMoveFunc(direction).bind(this);
   newCoords = moveFunc(element);
-
+  console.log('new', newCoords[0], newCoords[1], direction);
   element
     .transition()
-    .duration(100)
+    .duration(1000)
     .ease('linear')
     .style({
       top: this.pixelize(newCoords[1]),
