@@ -3,7 +3,7 @@ var Game = function () {
   this.numberOfRobots = 10;
   this.spriteSize = 64;
   this.stepSize = 10;
-  this.jitter = 100;
+  this.jitter = 50;
 };
 
 Game.prototype.pixelize = function(number) { return number + 'px'; };
@@ -33,7 +33,7 @@ Game.prototype.addRobots = function() {
     .data(_.range(this.numberOfRobots))
     .enter()
     .insert('div')
-    .classed('robot robotSouth', true)
+    .classed('robot', true)
     .style({
       top: this.randY.bind(this),
       left: this.randX.bind(this)
@@ -68,6 +68,7 @@ Game.prototype.moveRobotNorth = function(element) {
     var moveFunc = this.getMoveFunc(currentCoords[1] % 5).bind(this);
     return moveFunc(element);
   } else {
+    element.attr('class', 'robot robotNorth');
     return currentCoords;
   }
 };
@@ -79,6 +80,7 @@ Game.prototype.moveRobotEast = function(element) {
     var moveFunc = this.getMoveFunc(currentCoords[0] % 5).bind(this);
     return moveFunc(element);
   } else {
+    element.attr('class', 'robot robotEast');
     return currentCoords;
   }
 };
@@ -90,6 +92,7 @@ Game.prototype.moveRobotSouth = function(element) {
     var moveFunc = this.getMoveFunc(currentCoords[1] % 5).bind(this);
     return moveFunc(element);
   } else {
+    element.attr('class', 'robot robotSouth');
     return currentCoords;
   }
 };
@@ -101,11 +104,13 @@ Game.prototype.moveRobotWest = function(element) {
     var moveFunc = this.getMoveFunc(currentCoords[0] % 5).bind(this);
     return moveFunc(element);
   } else {
+    element.attr('class', 'robot robotWest');
     return currentCoords;
   }
 };
 
 Game.prototype.moveRobotPause = function(element) {
+  element.attr('class', 'robot');
   return this.getCurrentCoords(element);
 };
 
