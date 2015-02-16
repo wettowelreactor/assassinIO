@@ -24,7 +24,7 @@
 }
 
 .robot {
-  position: fixed;
+  position: absolute;
   width: 32px;
   height: 32px;
   background: url('characterSprites.png');
