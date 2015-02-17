@@ -1,6 +1,6 @@
 var Game = function () {
   this.activePlayers = 0;
-  this.numberOfRobots = 1;
+  this.numberOfRobots = 50;
   this.spriteSize = 64;
   this.stepSize = 10;
 };
@@ -23,7 +23,7 @@ Game.prototype.randY = function() {
 Game.prototype.minX = function() { return 0; };
 Game.prototype.maxX = function() { return window.innerWidth - this.spriteSize; };
 Game.prototype.minY = function() { return 60; };
-Game.prototype.maxY = function() { return window.innerHeight - this.spriteSize -60; };
+Game.prototype.maxY = function() { return window.innerHeight - this.spriteSize; };
 
 Game.prototype.initalize = function() {
   game.addRobots();
@@ -50,7 +50,6 @@ Game.prototype.moveRobots = function(elements) {
 };
 
 Game.prototype.getMoveFunc = function(number) {
-  console.log('get move', number);
   if (number === 0) {
     return this.moveRobotNorth;
   } else if (number === 1) {
