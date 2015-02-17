@@ -1,8 +1,10 @@
-var GameClient = function () {
+var _ = require('underscore');
+
+var GameServer = function () {
   this.activePlayers = 0;
   this.numberOfRobots = 50;
-  this.width = 1200;
-  this.height = 600;
+  this.width = 1280;
+  this.height = 640;
   this.spriteSize = 64;
   this.robots = [];
 };
@@ -12,13 +14,13 @@ GameServer.prototype.randX = function() {
   var randx = this.rand(this.maxX()) + this.minX();
   var xoffset = randx % this.spriteSize;
   randx -= xoffset;
-  return this.pixelize(randx); 
+  return randx; 
 };
 GameServer.prototype.randY = function() {
   var randy = this.rand(this.maxY()) + this.minY();
   var yoffset = randy % this.spriteSize;
   randy -= yoffset;
-  return this.pixelize(randy);
+  return randy;
 };
 GameServer.prototype.randDirection = function() {
   var direction = this.rand(5);
@@ -41,7 +43,7 @@ GameServer.prototype.maxY = function() { return this.height - this.spriteSize; }
 
 GameServer.prototype.initalize = function() {
   this.initRobots();
-  this.moveRobots();
+  setInterval(this.moveRobots.bind(this), 1000);
 };
 
 GameServer.prototype.initRobots = function() {
@@ -52,38 +54,39 @@ GameServer.prototype.initRobots = function() {
       y: this.randY(), 
       direction: direction
     };
-  });
+  }.bind(this));
 };
 
 GameServer.prototype.moveRobots = function() {
   _.each(this.robots, function(robot, index, robots) {
-    robots[i] = this.moveRobot(robot);
-  });
+    robots[index] = this.moveRobot(robot);
+  }.bind(this));
+  console.log(this.robots);
   //io.emit(robots)
 };
 
 GameServer.prototype.moveRobot = function(robot) {
   this.setRobotDirection(robot);
-  if (robot.direction === 'N') {
-    if (robot.y - this.spriteSize < this.minY) {
+  if (robot.direction === 'North') {
+    if (robot.y - this.spriteSize < this.minY()) {
       this.moveRobot(robot);
     } else {
       robot.y -= this.spriteSize;
     }
-  } else if (robot.direction === 'S') {
-    if (robot.y + this.spriteSize < this.maxY) {
+  } else if (robot.direction === 'South') {
+    if (robot.y + this.spriteSize < this.maxY()) {
       this.moveRobot(robot);
     } else {
       robot.y += this.spriteSize;
     }
-  } else if (robot.direction === 'W') {
-    if (robot.x - this.spriteSize < this.minX) {
+  } else if (robot.direction === 'West') {
+    if (robot.x - this.spriteSize < this.minX()) {
       this.moveRobot(robot);
     } else {
       robot.x -= this.spriteSize;
     }
-  } else if (robot.direction === 'E') {
-    if (robot.x + this.spriteSize < this.maxX) {
+  } else if (robot.direction === 'East') {
+    if (robot.x + this.spriteSize < this.maxX()) {
       this.moveRobot(robot);
     } else {
       robot.x += this.spriteSize;
@@ -97,3 +100,5 @@ GameServer.prototype.setRobotDirection = function(robot){
     robot.direction = this.randDirection();
   }
 };
+
+module.exports = GameServer;
