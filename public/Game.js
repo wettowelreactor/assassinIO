@@ -141,3 +141,6 @@ Game.prototype.moveRobot = function(element, bias) {
       this.moveRobot(element, direction);
     }.bind(this));
 };
+
+var game = new Game();
+game.initalize();
