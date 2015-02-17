@@ -2,7 +2,6 @@ var Game = function () {
   this.activePlayers = 0;
   this.numberOfRobots = 50;
   this.spriteSize = 64;
-  this.stepSize = 10;
 };
 
 Game.prototype.pixelize = function(number) { return number + 'px'; };
