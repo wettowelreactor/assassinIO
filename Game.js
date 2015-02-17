@@ -50,6 +50,7 @@ Game.prototype.moveRobots = function(elements) {
 };
 
 Game.prototype.getMoveFunc = function(number) {
+  console.log('get move', number);
   if (number === 0) {
     return this.moveRobotNorth;
   } else if (number === 1) {
@@ -67,7 +68,7 @@ Game.prototype.moveRobotNorth = function(element) {
   var currentCoords = this.getCurrentCoords(element);
   currentCoords[1] -= this.spriteSize;
   if (currentCoords[1] < this.minY()) {
-    var moveFunc = this.getMoveFunc(currentCoords[1] % 5).bind(this);
+    var moveFunc = this.getMoveFunc(this.rand(5)).bind(this);
     return moveFunc(element);
   } else {
     element.attr('class', 'robot robotNorth');
@@ -79,7 +80,7 @@ Game.prototype.moveRobotEast = function(element) {
   var currentCoords = this.getCurrentCoords(element);
   currentCoords[0] += this.spriteSize;
   if (currentCoords[0] > this.maxX()) {
-    var moveFunc = this.getMoveFunc(currentCoords[0] % 5).bind(this);
+    var moveFunc = this.getMoveFunc(this.rand(5)).bind(this);
     return moveFunc(element);
   } else {
     element.attr('class', 'robot robotEast');
@@ -91,7 +92,7 @@ Game.prototype.moveRobotSouth = function(element) {
   var currentCoords = this.getCurrentCoords(element);
   currentCoords[1] += this.spriteSize;
   if (currentCoords[1] > this.maxY()) {
-    var moveFunc = this.getMoveFunc(currentCoords[1] % 5).bind(this);
+    var moveFunc = this.getMoveFunc(this.rand(5)).bind(this);
     return moveFunc(element);
   } else {
     element.attr('class', 'robot robotSouth');
@@ -103,7 +104,7 @@ Game.prototype.moveRobotWest = function(element) {
   var currentCoords = this.getCurrentCoords(element);
   currentCoords[0] -= this.spriteSize;
   if (currentCoords[0] < this.minX()) {
-    var moveFunc = this.getMoveFunc(currentCoords[0] % 5).bind(this);
+    var moveFunc = this.getMoveFunc(this.rand(5)).bind(this);
     return moveFunc(element);
   } else {
     element.attr('class', 'robot robotWest');
@@ -119,7 +120,6 @@ Game.prototype.moveRobotPause = function(element) {
 Game.prototype.getCurrentCoords = function(element) {
   var x = +this.dePixel(element.style('left'));
   var y = +this.dePixel(element.style('top'));
-  console.log('current', x, y);
   return [x, y];
 };
 
@@ -131,7 +131,6 @@ Game.prototype.moveRobot = function(element, bias) {
   direction = direction > 4 ? bias : direction;
   moveFunc = this.getMoveFunc(direction).bind(this);
   newCoords = moveFunc(element);
-  console.log('new', newCoords[0], newCoords[1], direction);
   element
     .transition()
     .duration(1000)
