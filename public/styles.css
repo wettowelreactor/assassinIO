@@ -11,8 +11,8 @@
 }
 
 .playArea {
-  width: 100vh;
-  height: 100vw;
+  width: 1280px;
+  height: 640px;
 }
 
 .killCount {
