@@ -20,6 +20,13 @@
     </div>
     <script src="/bower_components/d3/d3.min.js"></script>
     <script src="/bower_components/underscore/underscore-min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
     <script src='Game.js'></script>
+    <script>
+      var socket = io();
+      socket.on('robotMoves', function(msg){
+        console.log(msg);
+      });
+    </script>
   </body>
 </html>

@@ -64,13 +64,11 @@ GameServer.prototype.moveRobots = function() {
   _.each(this.robots, function(robot, index, robots) {
     robots[index] = this.moveRobot(robot);
   }.bind(this));
-  //console.log(this.robots);
-  //io.emit(robots)
+  io.emit('robotMoves', this.robots);
 };
 
 GameServer.prototype.moveRobot = function(robot) {
   this.setRobotDirection(robot);
-  console.log(robot);
   if (robot.direction === 'North') {
     if (robot.y - this.spriteSize < this.minY()) {
       this.moveRobot(robot);
