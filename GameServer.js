@@ -24,17 +24,19 @@ GameServer.prototype.randY = function() {
 };
 GameServer.prototype.randDirection = function() {
   var direction = this.rand(5);
+  var result;
   if (direction === 0) {
-    return 'Pause';
+    result = 'Pause';
   } else if (direction === 1) {
-    return 'North';
+    result = 'North';
   } else if (direction === 2) {
-    return 'East';
+    result = 'East';
   } else if (direction === 3) {
-    return 'South';
+    result = 'South';
   } else {
-    return 'West';
+    result = 'West';
   }
+  return result;
 };
 GameServer.prototype.minX = function() { return 0; };
 GameServer.prototype.maxX = function() { return this.width - this.spriteSize; };
@@ -48,8 +50,9 @@ GameServer.prototype.initalize = function() {
 
 GameServer.prototype.initRobots = function() {
   var direction = this.randDirection();
-  this.robots = _.map(_.range(this.numberOfRobots), function(){
+  this.robots = _.map(_.range(this.numberOfRobots), function(value){
     return {
+      id: value,
       x: this.randX(), 
       y: this.randY(), 
       direction: direction
@@ -61,12 +64,13 @@ GameServer.prototype.moveRobots = function() {
   _.each(this.robots, function(robot, index, robots) {
     robots[index] = this.moveRobot(robot);
   }.bind(this));
-  console.log(this.robots);
+  //console.log(this.robots);
   //io.emit(robots)
 };
 
 GameServer.prototype.moveRobot = function(robot) {
   this.setRobotDirection(robot);
+  console.log(robot);
   if (robot.direction === 'North') {
     if (robot.y - this.spriteSize < this.minY()) {
       this.moveRobot(robot);
@@ -74,7 +78,7 @@ GameServer.prototype.moveRobot = function(robot) {
       robot.y -= this.spriteSize;
     }
   } else if (robot.direction === 'South') {
-    if (robot.y + this.spriteSize < this.maxY()) {
+    if (robot.y + this.spriteSize > this.maxY()) {
       this.moveRobot(robot);
     } else {
       robot.y += this.spriteSize;
@@ -86,7 +90,7 @@ GameServer.prototype.moveRobot = function(robot) {
       robot.x -= this.spriteSize;
     }
   } else if (robot.direction === 'East') {
-    if (robot.x + this.spriteSize < this.maxX()) {
+    if (robot.x + this.spriteSize > this.maxX()) {
       this.moveRobot(robot);
     } else {
       robot.x += this.spriteSize;
@@ -96,7 +100,7 @@ GameServer.prototype.moveRobot = function(robot) {
 };
 
 GameServer.prototype.setRobotDirection = function(robot){
-  if (this.rand(10) < 5) {
+  if (this.rand(2) === 1) {
     robot.direction = this.randDirection();
   }
 };
