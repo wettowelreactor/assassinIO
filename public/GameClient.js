@@ -6,11 +6,12 @@ var GameClient = function () {
 GameClient.prototype.pixelize = function(number) { return number + 'px'; };
 GameClient.prototype.dePixel = function(string) { return string.slice( 0, -2 ); };
 
-GameClient.prototype.initalize = function() {};
+GameClient.prototype.initPlayer = function() {
+  d3.select('.playArea').selectAll('.player');
 
+};
 
 GameClient.prototype.moveRobots = function(moves) {
-  console.log("move robots");
   var d3Robots = d3.select('.playArea').selectAll('.robot')
     .data(moves, function(d){return d.id;});
 
@@ -38,6 +39,8 @@ GameClient.prototype.moveRobots = function(moves) {
 gameClient = new GameClient();
 var socket = io();
 socket.on('robotMoves', function(msg) {
-  console.log('moves received');
   gameClient.moveRobots(msg);
+});
+socket.on('playerID', function(msg) {
+  console.log('ID:', msg);
 });

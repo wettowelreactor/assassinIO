@@ -3,15 +3,22 @@ var app = express();
 var http = require('http').Server(app);
 global.io = require('socket.io')(http);
 var GameServer = require('./GameServer.js');
+var players = [];
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
 io.on('connection', function(socket){
-  console.log('a user connected');
+  console.log('New client connected (id=' + socket.id + ').');
+  players.push(socket.id);
+  io.sockets.connected[socket.id].emit('playerID', socket.id);
   socket.on('disconnect', function(){
-    console.log('user disconnected');
+    var index = players.indexOf(socket.id);
+    if (index != -1) {
+        players.splice(index, 1);
+        console.info('Client gone (id=' + socket.id + ').');
+    }
   });
 });
 
