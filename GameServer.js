@@ -54,6 +54,7 @@ GameServer.prototype.initalize = function() {
 
 GameServer.prototype.gameTick = function() {
   this.moveRobots();
+  console.log(this.players);
 };
 
 GameServer.prototype.initRobots = function() {
@@ -66,6 +67,20 @@ GameServer.prototype.initRobots = function() {
       direction: direction
     };
   }.bind(this));
+};
+
+GameServer.prototype.getPlayerDirection = function(move) {
+  if (move === 87) {
+    return 'North';
+  } else if (move === 83) {
+    return 'South';
+  } else if (move === 65) {
+    return 'West';
+  } else if (move === 68) {
+    return 'East';
+  } else {
+    return 'Pause';
+  }
 };
 
 GameServer.prototype.moveRobots = function() {
@@ -112,15 +127,26 @@ GameServer.prototype.setRobotDirection = function(robot){
 };
 
 GameServer.prototype.addPlayer = function(id) {
-  this.players[id] = null;
+  this.players[id] = {
+    id: id,
+    x: this.randX(), 
+    y: this.randY(), 
+    direction: 'Pause'
+  };
 };
 
 GameServer.prototype.removePlayer = function(id) {
   delete this.players[id];
 };
 
-GameServer.prototype.addMove = function (id, move) {
-  this.players[id] = move;
+GameServer.prototype.addMove = function (id, move, keyDown) {
+  if (keyDown && move !== ' '.charCodeAt()) {
+    this.players[id].move = this.getPlayerDirection(move);
+  } else if (keyDown && move === 32) {
+    this.players[id].attacking = true;
+  } else if (!keyDown && move === 32) {
+    this.players[id].attacking = false;
+  }
 };
 
 module.exports = GameServer;

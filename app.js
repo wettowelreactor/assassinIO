@@ -3,7 +3,6 @@ var app = express();
 var http = require('http').Server(app);
 global.io = require('socket.io')(http);
 var GameServer = require('./GameServer.js');
-var players = [];
 
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
@@ -11,16 +10,16 @@ app.get('/', function(req, res){
 
 io.on('connection', function(socket){
   console.log('New client connected (id=' + socket.id + ').');
-  players.push(socket.id);
+  gameServer.addPlayer(socket.id);
   socket.on('disconnect', function(){
-    var index = players.indexOf(socket.id);
-    if (index != -1) {
-        players.splice(index, 1);
-        console.info('Client gone (id=' + socket.id + ').');
-    }
+    gameServer.removePlayer(socket.id);
+    console.info('Client gone (id=' + socket.id + ').');
   });
-  socket.on('playerMove', function(msg){
-    gameServer.addMove(socket.id, msg);
+  socket.on('playerKeyDown', function(msg){
+    gameServer.addMove(socket.id, msg.move, true);
+  });
+  socket.on('playerKeyUp', function(msg){
+    gameServer.addMove(socket.id, msg.move, false);
   });
 });
 

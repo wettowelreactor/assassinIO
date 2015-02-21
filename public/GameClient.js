@@ -2,17 +2,23 @@ var GameClient = function () {
   this.activePlayers = 0;
   this.width = 1280;
   this.height = 640;
-  this.id = null;
 };
 GameClient.prototype.pixelize = function(number) { return number + 'px'; };
 GameClient.prototype.dePixel = function(string) { return string.slice( 0, -2 ); };
 
 GameClient.prototype.initalize = function() {
-  d3.selectAll('body').on('keypress', this.keyPress);
+  d3.selectAll('body').on('keydown', this.keyDown);
+  d3.selectAll('body').on('keyup', this.keyUp);
 };
 
-GameClient.prototype.keyPress = function() {
-  socket.emit('playerMove', {move: d3.event.charCode});
+GameClient.prototype.keyDown = function() {
+  var data = {move: d3.event.keyCode};
+  socket.emit('playerKeyDown', data);
+};
+
+GameClient.prototype.keyUp = function() {
+  var data = {move: d3.event.keyCode};
+  socket.emit('playerKeyUp', data);
 };
 
 GameClient.prototype.moveRobots = function(moves) {
@@ -44,10 +50,6 @@ gameClient = new GameClient();
 
 socket.on('robotMoves', function(msg) {
   gameClient.moveRobots(msg);
-});
-socket.on('playerID', function(msg) {
-  gameClient['id'] = msg;
-  console.log('ID:', msg);
 });
 
 gameClient.initalize();
