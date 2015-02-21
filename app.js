@@ -12,13 +12,15 @@ app.get('/', function(req, res){
 io.on('connection', function(socket){
   console.log('New client connected (id=' + socket.id + ').');
   players.push(socket.id);
-  io.sockets.connected[socket.id].emit('playerID', socket.id);
   socket.on('disconnect', function(){
     var index = players.indexOf(socket.id);
     if (index != -1) {
         players.splice(index, 1);
         console.info('Client gone (id=' + socket.id + ').');
     }
+  });
+  socket.on('playerMove', function(msg){
+    console.log('playermove',socket.id, msg);
   });
 });
 
