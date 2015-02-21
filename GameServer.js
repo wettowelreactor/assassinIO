@@ -49,7 +49,7 @@ GameServer.prototype.maxY = function() { return this.height - this.spriteSize; }
 
 GameServer.prototype.initalize = function() {
   this.initRobots();
-  setInterval(this.gameTick.bind(this), 1000);
+  setInterval(this.gameTick.bind(this), 500);
 };
 
 GameServer.prototype.gameTick = function() {
@@ -140,12 +140,14 @@ GameServer.prototype.removePlayer = function(id) {
 };
 
 GameServer.prototype.addMove = function (id, move, keyDown) {
-  if (keyDown && move !== ' '.charCodeAt()) {
-    this.players[id].move = this.getPlayerDirection(move);
-  } else if (keyDown && move === 32) {
+  if (keyDown && move === 32) {
     this.players[id].attacking = true;
   } else if (!keyDown && move === 32) {
     this.players[id].attacking = false;
+  } else if (keyDown) {
+    this.players[id].move = this.getPlayerDirection(move);
+  } else {
+    this.players[id].move = "Pause";
   }
 };
 

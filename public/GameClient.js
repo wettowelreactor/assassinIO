@@ -38,7 +38,7 @@ GameClient.prototype.moveRobots = function(moves) {
       if (d.direction === "West") { roboclass += ' robotWest'; }
       return roboclass;
     }).transition()
-    .duration(1000)
+    .duration(500)
     .ease('linear')
     .style({
       top: function(d){return this.pixelize(d.y);}.bind(this),
