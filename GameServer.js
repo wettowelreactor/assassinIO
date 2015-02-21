@@ -7,6 +7,7 @@ var GameServer = function () {
   this.height = 640;
   this.spriteSize = 64;
   this.robots = [];
+  this.players = {};
 };
 
 GameServer.prototype.rand  = function(n){ return Math.floor( Math.random() * n ); };
@@ -101,6 +102,18 @@ GameServer.prototype.setRobotDirection = function(robot){
   if (this.rand(2) === 1) {
     robot.direction = this.randDirection();
   }
+};
+
+GameServer.prototype.addPlayer = function(id) {
+  this.players[id] = null;
+};
+
+GameServer.prototype.removePlayer = function(id) {
+  delete this.players[id];
+};
+
+GameServer.prototype.addMove = function (id, move) {
+  this.players[id] = move;
 };
 
 module.exports = GameServer;

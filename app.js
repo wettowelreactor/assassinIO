@@ -20,7 +20,7 @@ io.on('connection', function(socket){
     }
   });
   socket.on('playerMove', function(msg){
-    console.log('playermove',socket.id, msg);
+    gameServer.addMove(socket.id, msg);
   });
 });
 
