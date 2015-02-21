@@ -17,12 +17,14 @@ GameServer.prototype.randX = function() {
   randx -= xoffset;
   return randx; 
 };
+
 GameServer.prototype.randY = function() {
   var randy = this.rand(this.maxY()) + this.minY();
   var yoffset = randy % this.spriteSize;
   randy -= yoffset;
   return randy;
 };
+
 GameServer.prototype.randDirection = function() {
   var direction = this.rand(5);
   var result;
@@ -39,6 +41,7 @@ GameServer.prototype.randDirection = function() {
   }
   return result;
 };
+
 GameServer.prototype.minX = function() { return 0; };
 GameServer.prototype.maxX = function() { return this.width - this.spriteSize; };
 GameServer.prototype.minY = function() { return 0; };
@@ -46,7 +49,11 @@ GameServer.prototype.maxY = function() { return this.height - this.spriteSize; }
 
 GameServer.prototype.initalize = function() {
   this.initRobots();
-  setInterval(this.moveRobots.bind(this), 1000);
+  setInterval(this.gameTick.bind(this), 1000);
+};
+
+GameServer.prototype.gameTick = function() {
+  this.moveRobots();
 };
 
 GameServer.prototype.initRobots = function() {
