@@ -10,6 +10,17 @@ var GameServer = function () {
   this.players = {};
 };
 
+GameServer.prototype.initalize = function() {
+  this.initRobots();
+  setInterval(this.gameTick.bind(this), 500);
+};
+
+GameServer.prototype.gameTick = function() {
+  this.moveRobots();
+  this.movePlayers();
+  console.log(this.players);
+};
+
 GameServer.prototype.rand  = function(n){ return Math.floor( Math.random() * n ); };
 GameServer.prototype.randX = function() { 
   var randx = this.rand(this.maxX()) + this.minX();
@@ -47,15 +58,6 @@ GameServer.prototype.maxX = function() { return this.width - this.spriteSize; };
 GameServer.prototype.minY = function() { return 0; };
 GameServer.prototype.maxY = function() { return this.height - this.spriteSize; };
 
-GameServer.prototype.initalize = function() {
-  this.initRobots();
-  setInterval(this.gameTick.bind(this), 500);
-};
-
-GameServer.prototype.gameTick = function() {
-  this.moveRobots();
-  console.log(this.players);
-};
 
 GameServer.prototype.initRobots = function() {
   var direction = this.randDirection();
@@ -83,7 +85,7 @@ GameServer.prototype.getPlayerDirection = function(move) {
   }
 };
 
-GameServer.prototype.movePlayer = function() {
+GameServer.prototype.movePlayers = function() {
   _.each(this.players, function(player, index, players) {
     this.movePlayer(player);
   }.bind(this));

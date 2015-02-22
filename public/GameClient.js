@@ -45,11 +45,15 @@ GameClient.prototype.moveRobots = function(moves) {
       left: function(d){return this.pixelize(d.x);}.bind(this)
     });
 };
+var gameClient = new GameClient();
 var socket = io();
-gameClient = new GameClient();
 
 socket.on('robotMoves', function(msg) {
   gameClient.moveRobots(msg);
+});
+
+socket.on('playerMoves', function(msg) {
+  console.log(msg);
 });
 
 gameClient.initalize();
