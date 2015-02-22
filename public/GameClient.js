@@ -33,7 +33,7 @@ GameClient.prototype.moveRobots = function(moves) {
     .attr('class', function(d) {
       var roboclass = 'robot';
       if (d.direction === "North") { roboclass += ' robotNorth'; }
-      if (d.direction === "South") { roboclass += ' robotSouth'; }
+      if (d.direction === "South") { roboclass += ' playerSouth'; }
       if (d.direction === "East") { roboclass += ' robotEast'; }
       if (d.direction === "West") { roboclass += ' robotWest'; }
       return roboclass;

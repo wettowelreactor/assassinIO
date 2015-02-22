@@ -106,16 +106,16 @@
 }
 
 .playerSouth{
-  -webkit-animation: robotForward .9s steps(2) infinite;
-  animation: robotForward .9s steps(2) infinite;
+  -webkit-animation: playerSouth .9s steps(2) infinite;
+  animation: playerSouth .9s steps(2) infinite;
 }
 
-@-webkit-keyframes robotForward {
+@-webkit-keyframes playerSouth {
    0% { background-position: -192px -128px; }
    100% { background-position: -256px -128px; }
 }
 
-@keyframes robotForward {
+@keyframes playerSouth {
    0% { background-position: -192px -128px; }
    100% { background-position: -256px -128px; }
 }
