@@ -35,18 +35,18 @@
 }
 
 .robotSouth{
-  -webkit-animation: robotForward .9s steps(2) infinite;
+  -webkit-animation: robotNorth .9s steps(2) infinite;
   animation: robotForward .9s steps(2) infinite;
 }
 
-@-webkit-keyframes robotForward {
+@-webkit-keyframes robotNorth {
    0% { background-position: -96px 0; }
    100% { background-position: -160px 0; }
 }
 
-@keyframes robotForward {
+@keyframes robotNorth {
    0% { background-position: -96px 0; }
-   100% { background-position: -224px 0; }
+   100% { background-position: -160px 0; }
 }
 
 .robotWest{
@@ -99,8 +99,23 @@
   width: 32px;
   height: 32px;
   background: url('/characterSprites.png');
-  background-position: -224px 0;
+  background-position: -224px -128px;
   -webkit-transform: scale(2);
   -ms-transform: scale(2);
   transform: scale(2);
+}
+
+.playerSouth{
+  -webkit-animation: robotForward .9s steps(2) infinite;
+  animation: robotForward .9s steps(2) infinite;
+}
+
+@-webkit-keyframes robotForward {
+   0% { background-position: -192px -128px; }
+   100% { background-position: -256px -128px; }
+}
+
+@keyframes robotForward {
+   0% { background-position: -192px -128px; }
+   100% { background-position: -256px -128px; }
 }
