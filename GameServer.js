@@ -83,6 +83,25 @@ GameServer.prototype.getPlayerDirection = function(move) {
   }
 };
 
+GameServer.prototype.movePlayer = function() {
+  _.each(this.players, function(player, index, players) {
+    this.movePlayer(player);
+  }.bind(this));
+  io.emit('playerMoves', this.players);
+};
+
+GameServer.prototype.movePlayer = function(player) {
+  if (player.direction === 'North') {
+    player.y = Math.max(player.y - this.spriteSize, this.minY());
+  } else if (player.direction === 'South') {
+    player.y = Math.min(player.y + this.spriteSize, this.maxY());
+  } else if (player.direction === 'West') {
+    player.x = Math.max(player.x - this.spriteSize, this.minX());
+  } else if (player.direction === 'East') {
+    player.x = Math.min(player.x + this.spriteSize, this.maxX());
+  }
+};
+
 GameServer.prototype.moveRobots = function() {
   _.each(this.robots, function(robot, index, robots) {
     robots[index] = this.moveRobot(robot);
@@ -145,9 +164,9 @@ GameServer.prototype.addMove = function (id, move, keyDown) {
   } else if (!keyDown && move === 32) {
     this.players[id].attacking = false;
   } else if (keyDown) {
-    this.players[id].move = this.getPlayerDirection(move);
+    this.players[id].direction = this.getPlayerDirection(move);
   } else {
-    this.players[id].move = "Pause";
+    this.players[id].direction = "Pause";
   }
 };
 
