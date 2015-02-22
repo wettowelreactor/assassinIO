@@ -104,7 +104,7 @@ GameServer.prototype.movePlayer = function(player) {
 
 GameServer.prototype.moveRobots = function() {
   _.each(this.robots, function(robot, index, robots) {
-    robots[index] = this.moveRobot(robot);
+    this.moveRobot(robot);
   }.bind(this));
   io.emit('robotMoves', this.robots);
 };
@@ -136,7 +136,6 @@ GameServer.prototype.moveRobot = function(robot) {
       robot.x += this.spriteSize;
     }
   }
-  return robot;
 };
 
 GameServer.prototype.setRobotDirection = function(robot){
