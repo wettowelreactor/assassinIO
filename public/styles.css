@@ -175,3 +175,134 @@
   -ms-transform: scale(2);
   transform: scale(2);
 }
+
+.attackSouth{
+  -webkit-animation: attackSouth .9s steps(2) infinite;
+  animation: attackSouth .9s steps(2) infinite;
+}
+
+@-webkit-keyframes attackSouth {
+   0% { background-position: -192px 0; }
+   100% { background-position: -256px 0; }
+}
+
+@keyframes attackSouth {
+   0% { background-position: -192px 0; }
+   100% { background-position: -256px 0; }
+}
+
+.attackWest{
+  -webkit-animation: attackWest .9s steps(2) infinite;
+  animation: attackWest .9s steps(2) infinite;
+}
+
+@-webkit-keyframes attackWest {
+   0% { background-position: -192px -32px; }
+   100% { background-position: -256px -32px; }
+}
+
+@keyframes attackWest {
+   0% { background-position: -192px -32px; }
+   100% { background-position: -256px -32px; }
+}
+
+.attackEast{
+  -webkit-animation: attackEast .9s steps(2) infinite;
+  animation: attackEast .9s steps(2) infinite;
+}
+
+@-webkit-keyframes attackEast {
+   0% { background-position: -192px -64px; }
+   100% { background-position: -256px -64px; }
+}
+
+@keyframes attackEast {
+   0% { background-position: -192px -64px; }
+   100% { background-position: -256px -64px; }
+}
+
+.attackNorth{
+  -webkit-animation: attackNorth .9s steps(2) infinite;
+  animation: attackNorth .9s steps(2) infinite;
+}
+
+@-webkit-keyframes attackNorth {
+   0% { background-position: -192px -96px; }
+   100% { background-position: -256px -96px; }
+}
+
+@keyframes attackNorth {
+   0% { background-position: -192px -96px; }
+   100% { background-position: -256px -96px; }
+}
+
+.revealed {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: url('/characterSprites.png');
+  background-position: -32px 0;
+  -webkit-transform: scale(2);
+  -ms-transform: scale(2);
+  transform: scale(2);
+}
+
+.revealedSouth{
+  -webkit-animation: revealedSouth .9s steps(2) infinite;
+  animation: revealedSouth .9s steps(2) infinite;
+}
+
+@-webkit-keyframes revealedSouth {
+   0% { background-position: 0 0; }
+   100% { background-position: -64px 0; }
+}
+
+@keyframes revealedSouth {
+   0% { background-position: 0 0; }
+   100% { background-position: -64px 0; }
+}
+
+.revealedWest{
+  -webkit-animation: revealedWest .9s steps(2) infinite;
+  animation: revealedWest .9s steps(2) infinite;
+}
+
+@-webkit-keyframes revealedWest {
+   0% { background-position: 0 -32px; }
+   100% { background-position: -64px -32px; }
+}
+
+@keyframes revealedWest {
+   0% { background-position: 0 -32px; }
+   100% { background-position: -64px -32px; }
+}
+
+.revealedEast{
+  -webkit-animation: revealedEast .9s steps(2) infinite;
+  animation: revealedEast .9s steps(2) infinite;
+}
+
+@-webkit-keyframes revealedEast {
+   0% { background-position: 0 -64px; }
+   100% { background-position: -64px -64px; }
+}
+
+@keyframes revealedEast {
+   0% { background-position: 0 -64px; }
+   100% { background-position: -64px -64px; }
+}
+
+.revealedNorth{
+  -webkit-animation: revealedEast .9s steps(2) infinite;
+  animation: revealedEast .9s steps(2) infinite;
+}
+
+@-webkit-keyframes revealedEast {
+   0% { background-position: 0 -96px; }
+   100% { background-position: -64px -96px; }
+}
+
+@keyframes revealedEast {
+   0% { background-position: 0 -96px; }
+   100% { background-position: -64px -96px; }
+}
