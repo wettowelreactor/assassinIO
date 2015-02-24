@@ -21,42 +21,41 @@ GameClient.prototype.keyUp = function() {
   socket.emit('playerKeyUp', data);
 };
 
+GameClient.prototype.getMoveClass = function(d) {
+  var moveClass;
+  if (d.id != socket.id) {
+    moveClass = 'robot'
+    if (d.direction !== 'Pause') {
+      moveClass += ' robot' + d.direction;
+    }
+  } else {
+    if (d.attacking === false) {
+      moveClass = 'player'
+      if (d.direction !== 'Pause') {
+        moveClass += ' player' + d.direction;
+      }
+    } else {
+      moveClass = 'attack'
+      if (d.direction !== 'Pause') {
+        moveClass += ' attack' + d.direction;
+      }
+    }
+  }
+  return moveClass;
+}
+
 GameClient.prototype.moveRobots = function(moves) {
-  var d3Robots = d3.select('.playArea').selectAll('.automated')
+  var d3Robots = d3.select('.playArea').selectAll('.npc')
     .data(moves, function(d){return d.id;});
 
   d3Robots.enter()
     .append('div')
-    .classed('sprite automated robot', true);
+    .classed('sprite npc robot', true);
 
   d3Robots
-    .classed('robotNorth', function(d) {return d.direction === 'North';})
-    .classed('robotSouth', function(d) {return d.direction === 'South';})
-    .classed('robotWest', function(d) {return d.direction === 'West';})
-    .classed('robotEast', function(d) {return d.direction === 'East';})
-    .transition()
-    .duration(500)
-    .ease('linear')
-    .style({
-      top: function(d){return this.pixelize(d.y);}.bind(this),
-      left: function(d){return this.pixelize(d.x);}.bind(this)
-    });
-};
-
-GameClient.prototype.movePlayers = function(moves) {
-  var d3Players = d3.select('.playArea').selectAll('.robot')
-    .data(moves, function(d){return d.id;});
-
-  d3Players.enter()
-    .append('div')
-    .classed('sprite automated robot', true);
-
-  d3Players
-    .classed('robotNorth', function(d) {return d.direction === 'North';})
-    .classed('robotSouth', function(d) {return d.direction === 'South';})
-    .classed('robotWest', function(d) {return d.direction === 'West';})
-    .classed('robotEast', function(d) {return d.direction === 'East';})
-    .transition()
+    .attr('class', function(d) {
+      return 'sprite npc ' + this.getMoveClass(d)}.bind(this)
+    ).transition()
     .duration(500)
     .ease('linear')
     .style({
