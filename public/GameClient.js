@@ -44,13 +44,26 @@ GameClient.prototype.moveRobots = function(moves) {
   var d3Robots = d3.select('.playArea').selectAll('.npc')
     .data(moves, function(d){return d.id;});
 
-  d3Robots.enter()
-    .append('div')
-    .classed('sprite npc robot', true);
+  this.move(d3Robots, 'npc');
+};
 
-  d3Robots
+GameClient.prototype.movePlayers = function(moves) {
+  var d3Players = d3.select('.playArea').selectAll('.pc')
+    .data(moves, function(d){return d.id;});
+
+  this.move(d3Robots, 'pc');
+}
+
+GameClient.prototype.move = function(selector, charType) {
+  var classBase = 'sprite '+ charType;
+
+  selector.enter()
+    .append('div')
+    .classed(classBase, true);
+
+  selector
     .attr('class', function(d) {
-      return 'sprite npc ' + this.getMoveClass(d)}.bind(this)
+      return classBase + ' ' + this.getMoveClass(d);}.bind(this)
     ).transition()
     .duration(490)
     .ease('linear')
