@@ -27,17 +27,14 @@ GameClient.prototype.moveRobots = function(moves) {
 
   d3Robots.enter()
     .append('div')
-    .classed('sprite robot', true);
+    .classed('sprite automated robot', true);
 
   d3Robots
-    .attr('class', function(d) {
-      var roboclass = 'sprite robot';
-      if (d.direction === "North") { roboclass += ' robotNorth'; }
-      if (d.direction === "South") { roboclass += ' robotSouth'; }
-      if (d.direction === "East") { roboclass += ' robotEast'; }
-      if (d.direction === "West") { roboclass += ' robotWest'; }
-      return roboclass;
-    }).transition()
+    .classed('robotNorth', function(d) {return d.direction === 'North';})
+    .classed('robotSouth', function(d) {return d.direction === 'South';})
+    .classed('robotWest', function(d) {return d.direction === 'West';})
+    .classed('robotEast', function(d) {return d.direction === 'East';})
+    .transition()
     .duration(500)
     .ease('linear')
     .style({
