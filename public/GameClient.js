@@ -21,28 +21,24 @@ GameClient.prototype.keyUp = function() {
   socket.emit('playerKeyUp', data);
 };
 
+GameClient.prototype.getCardinalClass = function(root, direction) {
+  if (direction === 'Pause') {
+    return root;
+  } else {
+    return root += ' ' + root + direction;
+  }
+};
+
 GameClient.prototype.getMoveClass = function(d) {
   var moveClass;
   if (d.id != socket.id) {
-    moveClass = 'robot'
-    if (d.direction !== 'Pause') {
-      moveClass += ' robot' + d.direction;
-    }
+    return this.getCardinalClass('robot', d.direction);
+  } else if (d.attacking === false) {
+    return this.getCardinalClass('player', d.direction);
   } else {
-    if (d.attacking === false) {
-      moveClass = 'player'
-      if (d.direction !== 'Pause') {
-        moveClass += ' player' + d.direction;
-      }
-    } else {
-      moveClass = 'attack'
-      if (d.direction !== 'Pause') {
-        moveClass += ' attack' + d.direction;
-      }
-    }
+    return this.getCardinalClass('attack', d.direction);
   }
-  return moveClass;
-}
+};
 
 GameClient.prototype.moveRobots = function(moves) {
   var d3Robots = d3.select('.playArea').selectAll('.npc')
@@ -56,7 +52,7 @@ GameClient.prototype.moveRobots = function(moves) {
     .attr('class', function(d) {
       return 'sprite npc ' + this.getMoveClass(d)}.bind(this)
     ).transition()
-    .duration(500)
+    .duration(490)
     .ease('linear')
     .style({
       top: function(d){return this.pixelize(d.y);}.bind(this),
