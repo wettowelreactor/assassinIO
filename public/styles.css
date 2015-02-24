@@ -119,3 +119,48 @@
    0% { background-position: -192px -128px; }
    100% { background-position: -256px -128px; }
 }
+
+.playerWest{
+  -webkit-animation: playerWest .9s steps(2) infinite;
+  animation: playerWest .9s steps(2) infinite;
+}
+
+@-webkit-keyframes playerWest {
+   0% { background-position: -192px -160px; }
+   100% { background-position: -256px -160px; }
+}
+
+@keyframes playerWest {
+   0% { background-position: -192px -160px; }
+   100% { background-position: -256px -160px; }
+}
+
+.playerEast{
+  -webkit-animation: playerEast .9s steps(2) infinite;
+  animation: playerEast .9s steps(2) infinite;
+}
+
+@-webkit-keyframes playerEast {
+   0% { background-position: -192px -192px; }
+   100% { background-position: -256px -192px; }
+}
+
+@keyframes playerEast {
+   0% { background-position: -192px -192px; }
+   100% { background-position: -256px -192px; }
+}
+
+.playerNorth{
+  -webkit-animation: playerNorth .9s steps(2) infinite;
+  animation: playerNorth .9s steps(2) infinite;
+}
+
+@-webkit-keyframes playerNorth {
+   0% { background-position: -192px -224px; }
+   100% { background-position: -256px -224px; }
+}
+
+@keyframes playerNorth {
+   0% { background-position: -192px -224px; }
+   100% { background-position: -256px -224px; }
+}

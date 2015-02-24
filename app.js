@@ -7,6 +7,8 @@ var GameServer = require('./GameServer.js');
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
+app.use(express.static(__dirname + '/public'));
+app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 io.on('connection', function(socket){
   console.log('New client connected (id=' + socket.id + ').');
@@ -23,8 +25,6 @@ io.on('connection', function(socket){
   });
 });
 
-app.use(express.static(__dirname + '/public'));
-app.use('/bower_components',  express.static(__dirname + '/bower_components'));
 
 http.listen(3000, function(){
   console.log('listening on *:3000');
