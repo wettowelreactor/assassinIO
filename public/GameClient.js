@@ -55,7 +55,6 @@ GameClient.prototype.movePlayers = function(moves) {
 
 GameClient.prototype.move = function(selector, charType) {
   var classBase = 'sprite '+ charType;
-
   selector.enter()
     .append('div')
     .classed(classBase, true);
@@ -80,7 +79,7 @@ socket.on('robotMoves', function(msg) {
 });
 
 socket.on('playerMoves', function(msg) {
-  gameClient.movePlayers(msg);
+  gameClient.movePlayers(_.map(msg, _.identity));
 });
 
 gameClient.initalize();
