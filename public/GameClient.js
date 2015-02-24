@@ -33,7 +33,7 @@ GameClient.prototype.getMoveClass = function(d) {
   var moveClass;
   if (d.id != socket.id) {
     return this.getCardinalClass('robot', d.direction);
-  } else if (d.attacking === false) {
+  } else if (d.attacking == null || d.attacking === false) {
     return this.getCardinalClass('player', d.direction);
   } else {
     return this.getCardinalClass('attack', d.direction);
