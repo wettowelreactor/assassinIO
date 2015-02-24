@@ -22,7 +22,7 @@ GameClient.prototype.keyUp = function() {
 };
 
 GameClient.prototype.moveRobots = function(moves) {
-  var d3Robots = d3.select('.playArea').selectAll('.robot')
+  var d3Robots = d3.select('.playArea').selectAll('.automated')
     .data(moves, function(d){return d.id;});
 
   d3Robots.enter()
@@ -42,6 +42,29 @@ GameClient.prototype.moveRobots = function(moves) {
       left: function(d){return this.pixelize(d.x);}.bind(this)
     });
 };
+
+GameClient.prototype.movePlayers = function(moves) {
+  var d3Players = d3.select('.playArea').selectAll('.robot')
+    .data(moves, function(d){return d.id;});
+
+  d3Players.enter()
+    .append('div')
+    .classed('sprite automated robot', true);
+
+  d3Players
+    .classed('robotNorth', function(d) {return d.direction === 'North';})
+    .classed('robotSouth', function(d) {return d.direction === 'South';})
+    .classed('robotWest', function(d) {return d.direction === 'West';})
+    .classed('robotEast', function(d) {return d.direction === 'East';})
+    .transition()
+    .duration(500)
+    .ease('linear')
+    .style({
+      top: function(d){return this.pixelize(d.y);}.bind(this),
+      left: function(d){return this.pixelize(d.x);}.bind(this)
+    });
+};
+
 var gameClient = new GameClient();
 var socket = io();
 
