@@ -164,3 +164,14 @@
    0% { background-position: -192px -224px; }
    100% { background-position: -256px -224px; }
 }
+
+.attack {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background: url('/characterSprites.png');
+  background-position: -224px 0;
+  -webkit-transform: scale(2);
+  -ms-transform: scale(2);
+  transform: scale(2);
+}
