@@ -50,8 +50,7 @@ GameClient.prototype.moveRobots = function(moves) {
 GameClient.prototype.movePlayers = function(moves) {
   var d3Players = d3.select('.playArea').selectAll('.pc')
     .data(moves, function(d){return d.id;});
-
-  this.move(d3Robots, 'pc');
+  this.move(d3Players, 'pc');
 }
 
 GameClient.prototype.move = function(selector, charType) {
@@ -81,7 +80,7 @@ socket.on('robotMoves', function(msg) {
 });
 
 socket.on('playerMoves', function(msg) {
-  console.log(msg);
+  gameClient.movePlayers(msg);
 });
 
 gameClient.initalize();

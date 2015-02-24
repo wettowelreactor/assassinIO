@@ -2,7 +2,7 @@ var _ = require('underscore');
 
 var GameServer = function () {
   this.activePlayers = 0;
-  this.numberOfRobots = 50;
+  this.numberOfRobots = 2;
   this.width = 1280;
   this.height = 640;
   this.spriteSize = 64;
