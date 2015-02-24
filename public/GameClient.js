@@ -27,11 +27,11 @@ GameClient.prototype.moveRobots = function(moves) {
 
   d3Robots.enter()
     .append('div')
-    .classed('robot', true);
+    .classed('sprite robot', true);
 
   d3Robots
     .attr('class', function(d) {
-      var roboclass = 'robot';
+      var roboclass = 'sprite robot';
       if (d.direction === "North") { roboclass += ' robotNorth'; }
       if (d.direction === "South") { roboclass += ' robotSouth'; }
       if (d.direction === "East") { roboclass += ' robotEast'; }

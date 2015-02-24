@@ -23,15 +23,18 @@
   color: red;
 }
 
-.robot {
+.sprite {
   position: absolute;
   width: 32px;
   height: 32px;
   background: url('/characterSprites.png');
-  background-position: -128px 0;
   -webkit-transform: scale(2);
   -ms-transform: scale(2);
   transform: scale(2);
+}
+
+.robot {  
+  background-position: -128px 0;  
 }
 
 .robotSouth{
@@ -95,14 +98,7 @@
 }
 
 .player {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  background: url('/characterSprites.png');
   background-position: -224px -128px;
-  -webkit-transform: scale(2);
-  -ms-transform: scale(2);
-  transform: scale(2);
 }
 
 .playerSouth{
@@ -166,14 +162,7 @@
 }
 
 .attack {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  background: url('/characterSprites.png');
   background-position: -224px 0;
-  -webkit-transform: scale(2);
-  -ms-transform: scale(2);
-  transform: scale(2);
 }
 
 .attackSouth{
@@ -237,14 +226,7 @@
 }
 
 .revealed {
-  position: absolute;
-  width: 32px;
-  height: 32px;
-  background: url('/characterSprites.png');
   background-position: -32px 0;
-  -webkit-transform: scale(2);
-  -ms-transform: scale(2);
-  transform: scale(2);
 }
 
 .revealedSouth{
