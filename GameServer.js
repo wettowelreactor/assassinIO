@@ -37,11 +37,9 @@ GameServer.prototype.randY = function() {
 };
 
 GameServer.prototype.randDirection = function() {
-  var direction = this.rand(5);
+  var direction = this.rand(4);
   var result;
-  if (direction === 0) {
-    result = 'Pause';
-  } else if (direction === 1) {
+  if (direction === 1) {
     result = 'North';
   } else if (direction === 2) {
     result = 'East';
@@ -166,9 +164,9 @@ GameServer.prototype.addMove = function (id, move, keyDown) {
     this.players[id].attacking = false;
   } else if (keyDown) {
     this.players[id].direction = this.getPlayerDirection(move);
-  } else {
-    this.players[id].direction = "Pause";
-  }
+  } //else {
+  //   this.players[id].direction = "Pause";
+  // }
 };
 
 module.exports = GameServer;
