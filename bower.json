@@ -1,0 +1,19 @@
+{
+  "name": "assassinIO",
+  "version": "0.0.0",
+  "authors": [
+    "Camille Roussel <camille@rousselfamily.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "~1.8.2",
+    "d3": "~3.5.5"
+  }
+}
