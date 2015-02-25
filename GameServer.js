@@ -2,7 +2,7 @@ var _ = require('underscore');
 
 var GameServer = function () {
   this.activePlayers = 0;
-  this.numberOfRobots = 50;
+  this.numberOfRobots = 30;
   this.width = 1280;
   this.height = 640;
   this.spriteSize = 64;
@@ -29,7 +29,7 @@ GameServer.prototype.randX = function() {
 };
 
 GameServer.prototype.randY = function() {
-  var randy = this.rand(this.maxY()) + this.minY();
+  var randy = this.rand(this.maxY() - this.minY()) + this.minY();
   var yoffset = randy % this.spriteSize;
   randy -= yoffset;
   return randy;
@@ -50,10 +50,10 @@ GameServer.prototype.randDirection = function() {
   return result;
 };
 
-GameServer.prototype.minX = function() { return 0; };
-GameServer.prototype.maxX = function() { return this.width - this.spriteSize; };
-GameServer.prototype.minY = function() { return 0; };
-GameServer.prototype.maxY = function() { return this.height - this.spriteSize; };
+GameServer.prototype.minX = function() { return this.spriteSize; };
+GameServer.prototype.maxX = function() { return this.width; };
+GameServer.prototype.minY = function() { return this.spriteSize; };
+GameServer.prototype.maxY = function() { return this.height; };
 
 
 GameServer.prototype.initRobots = function() {
@@ -100,10 +100,10 @@ GameServer.prototype.detectCollision = function(player, target) {
 
 GameServer.prototype.handleCollisions = function(player, players) {
   _.each(players, function(target){
-    if (this.detectCollision(player, target)) {
+    if (this.detectCollision(player, target) && Date.now() - target.dead > 2000) {
       player.kills = player.kills + 1 || 1;
-      console.log(target.deaths);
       target.deaths = target.deaths + 1 || 1;
+      target.dead = Date.now();
     }
   }, this);
 }
@@ -180,6 +180,7 @@ GameServer.prototype.addPlayer = function(id) {
     id: id,
     x: this.randX(), 
     y: this.randY(), 
+    dead: Date.now(),
     direction: this.randDirection()
   };
 };

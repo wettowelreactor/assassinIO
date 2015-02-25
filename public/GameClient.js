@@ -2,6 +2,7 @@ var GameClient = function () {
   this.activePlayers = 0;
   this.width = 1280;
   this.height = 640;
+  this.dwelltime = 4000;
 };
 GameClient.prototype.pixelize = function(number) { return number + 'px'; };
 GameClient.prototype.dePixel = function(string) { return string.slice( 0, -2 ); };
@@ -33,8 +34,14 @@ GameClient.prototype.getMoveClass = function(d) {
   var moveClass;
   if (d.attacking) {
     return this.getCardinalClass('attack', d.direction);
-  } else if (Date.now() - d.revealed < 2000) {
+  } else if (Date.now() - d.revealed < this.dwelltime) {
     return this.getCardinalClass('revealed', d.direction);
+  } else if (Date.now() - d.dead < this.dwelltime) {
+    if (d.id !== socket.id) {
+      return 'invisible';
+    } else {
+      return this.getCardinalClass('hidden', d.direction)
+    }
   } else if (d.id !== socket.id) {
     return this.getCardinalClass('robot', d.direction);
   } else {
