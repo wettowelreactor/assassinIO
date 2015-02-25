@@ -18,7 +18,6 @@ GameServer.prototype.initalize = function() {
 GameServer.prototype.gameTick = function() {
   this.moveRobots();
   this.movePlayers();
-  console.log(this.players);
 };
 
 GameServer.prototype.rand  = function(n){ return Math.floor( Math.random() * n ); };
@@ -83,10 +82,41 @@ GameServer.prototype.getPlayerDirection = function(move) {
   }
 };
 
+GameServer.prototype.getCoordCenter = function(point) {
+  return point + (this.spriteSize / 2);
+};
+
+GameServer.prototype.isLinearCollision = function(point1, point2) {
+  point1 = this.getCoordCenter(point1);
+  point2 = this.getCoordCenter(point2);
+  return Math.abs(point1 - point2) <= this.spriteSize;
+};
+
+GameServer.prototype.detectCollision = function(player, target) {
+  isXCollision = this.isLinearCollision(player.x, target.x);
+  isYCollision = this.isLinearCollision(player.y, target.y);
+  return player.id !== target.id && isXCollision && isYCollision;
+};
+
+GameServer.prototype.handleCollisions = function(player, players) {
+  _.each(players, function(target){
+    if (this.detectCollision(player, target)) {
+      player.kills = player.kills + 1 || 1;
+      console.log(target.deaths);
+      target.deaths = target.deaths + 1 || 1;
+    }
+  }, this);
+}
+
 GameServer.prototype.movePlayers = function() {
   _.each(this.players, function(player, index, players) {
+    if (player.attacking) {
+      this.handleCollisions(player, players);      
+    }
+  }, this)
+  _.each(this.players, function(player, index, players) {
     this.movePlayer(player);
-  }.bind(this));
+  }, this);
   io.emit('playerMoves', this.players);
 };
 
