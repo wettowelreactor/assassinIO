@@ -1,5 +1,12 @@
-* {
-  border: 1px solid red;
+.controlboard {
+  width:100%;
+  height: 32px;
+  background:white;
+}
+
+.controlboard>span {
+  padding-right: 30px;
+  font-size: 2.5em;
 }
 
 .scoreboard {
@@ -15,10 +22,11 @@
 }
 
 .playArea {
-  width: 1280px;
-  height: 640px;
-  margin: 16px 48px 32px 48px;
+  width: 1262px;
+  height: 637px;
+  margin: 16px 56px 32px 56px;
   padding: 0;
+  border: 3px solid black;
 }
 
 .killCount {
@@ -54,12 +62,12 @@
 
 @-webkit-keyframes robotNorth {
    0% { background-position: -96px 0; }
-   100% { background-position: -160px 0; }
+   100% { background-position: -224px 0; }
 }
 
 @keyframes robotNorth {
    0% { background-position: -96px 0; }
-   100% { background-position: -160px 0; }
+   100% { background-position: -224px 0; }
 }
 
 .robotWest{
@@ -118,12 +126,12 @@
 
 @-webkit-keyframes playerSouth {
    0% { background-position: -192px -128px; }
-   100% { background-position: -256px -128px; }
+   100% { background-position: -320px -128px; }
 }
 
 @keyframes playerSouth {
    0% { background-position: -192px -128px; }
-   100% { background-position: -256px -128px; }
+   100% { background-position: -320px -128px; }
 }
 
 .playerWest{
@@ -133,12 +141,12 @@
 
 @-webkit-keyframes playerWest {
    0% { background-position: -192px -160px; }
-   100% { background-position: -256px -160px; }
+   100% { background-position: -320px -160px; }
 }
 
 @keyframes playerWest {
    0% { background-position: -192px -160px; }
-   100% { background-position: -256px -160px; }
+   100% { background-position: -320px -160px; }
 }
 
 .playerEast{
@@ -148,12 +156,12 @@
 
 @-webkit-keyframes playerEast {
    0% { background-position: -192px -192px; }
-   100% { background-position: -256px -192px; }
+   100% { background-position: -320px -192px; }
 }
 
 @keyframes playerEast {
    0% { background-position: -192px -192px; }
-   100% { background-position: -256px -192px; }
+   100% { background-position: -320px -192px; }
 }
 
 .playerNorth{
@@ -163,12 +171,12 @@
 
 @-webkit-keyframes playerNorth {
    0% { background-position: -192px -224px; }
-   100% { background-position: -256px -224px; }
+   100% { background-position: -320px -224px; }
 }
 
 @keyframes playerNorth {
    0% { background-position: -192px -224px; }
-   100% { background-position: -256px -224px; }
+   100% { background-position: -320px -224px; }
 }
 
 .attack {
@@ -182,12 +190,12 @@
 
 @-webkit-keyframes attackSouth {
    0% { background-position: -192px 0; }
-   100% { background-position: -256px 0; }
+   100% { background-position: -320px 0; }
 }
 
 @keyframes attackSouth {
    0% { background-position: -192px 0; }
-   100% { background-position: -256px 0; }
+   100% { background-position: -320px 0; }
 }
 
 .attackWest{
@@ -197,12 +205,12 @@
 
 @-webkit-keyframes attackWest {
    0% { background-position: -192px -32px; }
-   100% { background-position: -256px -32px; }
+   100% { background-position: -320px -32px; }
 }
 
 @keyframes attackWest {
    0% { background-position: -192px -32px; }
-   100% { background-position: -256px -32px; }
+   100% { background-position: -320px -32px; }
 }
 
 .attackEast{
@@ -212,12 +220,12 @@
 
 @-webkit-keyframes attackEast {
    0% { background-position: -192px -64px; }
-   100% { background-position: -256px -64px; }
+   100% { background-position: -320px -64px; }
 }
 
 @keyframes attackEast {
    0% { background-position: -192px -64px; }
-   100% { background-position: -256px -64px; }
+   100% { background-position: -320px -64px; }
 }
 
 .attackNorth{
@@ -227,12 +235,12 @@
 
 @-webkit-keyframes attackNorth {
    0% { background-position: -192px -96px; }
-   100% { background-position: -256px -96px; }
+   100% { background-position: -320px -96px; }
 }
 
 @keyframes attackNorth {
    0% { background-position: -192px -96px; }
-   100% { background-position: -256px -96px; }
+   100% { background-position: -320px -96px; }
 }
 
 .revealed {
@@ -246,12 +254,12 @@
 
 @-webkit-keyframes revealedSouth {
    0% { background-position: 0 0; }
-   100% { background-position: -64px 0; }
+   100% { background-position: -128px 0; }
 }
 
 @keyframes revealedSouth {
    0% { background-position: 0 0; }
-   100% { background-position: -64px 0; }
+   100% { background-position: -128px 0; }
 }
 
 .revealedWest{
@@ -261,12 +269,12 @@
 
 @-webkit-keyframes revealedWest {
    0% { background-position: 0 -32px; }
-   100% { background-position: -64px -32px; }
+   100% { background-position: -128px -32px; }
 }
 
 @keyframes revealedWest {
    0% { background-position: 0 -32px; }
-   100% { background-position: -64px -32px; }
+   100% { background-position: -128px -32px; }
 }
 
 .revealedEast{
@@ -276,12 +284,12 @@
 
 @-webkit-keyframes revealedEast {
    0% { background-position: 0 -64px; }
-   100% { background-position: -64px -64px; }
+   100% { background-position: -128px -64px; }
 }
 
 @keyframes revealedEast {
    0% { background-position: 0 -64px; }
-   100% { background-position: -64px -64px; }
+   100% { background-position: -128px -64px; }
 }
 
 .revealedNorth{
@@ -291,12 +299,12 @@
 
 @-webkit-keyframes revealedNorth {
    0% { background-position: 0 -96px; }
-   100% { background-position: -64px -96px; }
+   100% { background-position: -128px -96px; }
 }
 
 @keyframes revealedNorth {
    0% { background-position: 0 -96px; }
-   100% { background-position: -64px -96px; }
+   100% { background-position: -128px -96px; }
 }
 
 .hidden {
@@ -310,12 +318,12 @@
 
 @-webkit-keyframes hiddenSouth {
    0% { background-position: -96px -128px; }
-   100% { background-position: -160px -128px; }
+   100% { background-position: -224px -128px; }
 }
 
 @keyframes hiddenSouth {
    0% { background-position: -96px -128px; }
-   100% { background-position: -160px -128px; }
+   100% { background-position: -224px -128px; }
 }
 
 .hiddenWest{
@@ -325,12 +333,12 @@
 
 @-webkit-keyframes hiddenWest {
    0% { background-position: -96px -160px; }
-   100% { background-position: -160px -160px; }
+   100% { background-position: -224px -160px; }
 }
 
 @keyframes hiddenWest {
    0% { background-position: -96px -160px; }
-   100% { background-position: -160px -160px; }
+   100% { background-position: -224px -160px; }
 }
 
 .hiddenEast{
@@ -340,25 +348,25 @@
 
 @-webkit-keyframes hiddenEast {
    0% { background-position: -96px -192px; }
-   100% { background-position: -160px -192px; }
+   100% { background-position: -224px -192px; }
 }
 
 @keyframes hiddenEast {
    0% { background-position: -96px -192px; }
-   100% { background-position: -160px -192px; }
+   100% { background-position: -224px -192px; }
 }
 
-.hiddenSouth{
-  -webkit-animation: hiddenEast .9s steps(2) infinite;
-  animation: hiddenEast .9s steps(2) infinite;
+.hiddenNorth{
+  -webkit-animation: hiddenNorth .9s steps(2) infinite;
+  animation: hiddenNorth .9s steps(2) infinite;
 }
 
-@-webkit-keyframes hiddenEast {
+@-webkit-keyframes hiddenNorth {
    0% { background-position: -96px -224px; }
-   100% { background-position: -160px -224px; }
+   100% { background-position: -224px -224px; }
 }
 
-@keyframes hiddenEast {
+@keyframes hiddenNorth {
    0% { background-position: -96px -224px; }
-   100% { background-position: -160px -224px; }
+   100% { background-position: -224px -224px; }
 }
