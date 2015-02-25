@@ -51,6 +51,7 @@ GameClient.prototype.movePlayers = function(moves) {
   var d3Players = d3.select('.playArea').selectAll('.pc')
     .data(moves, function(d){return d.id;});
   this.move(d3Players, 'pc');
+  d3Players.exit().remove();
 }
 
 GameClient.prototype.move = function(selector, charType) {
@@ -71,6 +72,10 @@ GameClient.prototype.move = function(selector, charType) {
     });
 };
 
+GameClient.prototype.updateCount = function(count, classSelector) {
+  d3.select(classSelector).text(count);
+};
+
 var gameClient = new GameClient();
 var socket = io();
 
@@ -79,7 +84,11 @@ socket.on('robotMoves', function(msg) {
 });
 
 socket.on('playerMoves', function(msg) {
-  gameClient.movePlayers(_.map(msg, _.identity));
+  var playersArray = _.map(msg, _.identity)
+  gameClient.movePlayers(playersArray);
+  gameClient.updateCount(playersArray.length, '.playerCount');
+  gameClient.updateCount(msg[socket.id].deaths || 0, '.deathCount');
+  gameClient.updateCount(msg[socket.id].kills || 0, '.killCount');
 });
 
 gameClient.initalize();
