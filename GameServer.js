@@ -111,7 +111,8 @@ GameServer.prototype.handleCollisions = function(player, players) {
 GameServer.prototype.movePlayers = function() {
   _.each(this.players, function(player, index, players) {
     if (player.attacking) {
-      this.handleCollisions(player, players);      
+      this.handleCollisions(player, players);
+      player.revealed = Date.now();    
     }
   }, this)
   _.each(this.players, function(player, index, players) {

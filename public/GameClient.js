@@ -31,12 +31,14 @@ GameClient.prototype.getCardinalClass = function(root, direction) {
 
 GameClient.prototype.getMoveClass = function(d) {
   var moveClass;
-  if (d.id != socket.id) {
-    return this.getCardinalClass('robot', d.direction);
-  } else if (d.attacking == null || d.attacking === false) {
-    return this.getCardinalClass('player', d.direction);
-  } else {
+  if (d.attacking) {
     return this.getCardinalClass('attack', d.direction);
+  } else if (Date.now() - d.revealed < 20000) {
+    return this.getCardinalClass('revealed', d.direction);
+  } else if (d.id !== socket.id) {
+    return this.getCardinalClass('robot', d.direction);
+  } else {
+    return this.getCardinalClass('player', d.direction);
   }
 };
 

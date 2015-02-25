@@ -275,16 +275,16 @@
 }
 
 .revealedNorth{
-  -webkit-animation: revealedEast .9s steps(2) infinite;
-  animation: revealedEast .9s steps(2) infinite;
+  -webkit-animation: revealedNorth .9s steps(2) infinite;
+  animation: revealedNorth .9s steps(2) infinite;
 }
 
-@-webkit-keyframes revealedEast {
+@-webkit-keyframes revealedNorth {
    0% { background-position: 0 -96px; }
    100% { background-position: -64px -96px; }
 }
 
-@keyframes revealedEast {
+@keyframes revealedNorth {
    0% { background-position: 0 -96px; }
    100% { background-position: -64px -96px; }
 }
