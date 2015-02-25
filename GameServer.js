@@ -179,7 +179,7 @@ GameServer.prototype.addPlayer = function(id) {
     id: id,
     x: this.randX(), 
     y: this.randY(), 
-    direction: 'Pause'
+    direction: this.randDirection()
   };
 };
 
